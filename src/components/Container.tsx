@@ -1,10 +1,11 @@
 import React, { ReactNode } from "react";
 /* eslint-disable prettier/prettier */
-import { Dimensions, Image, View, StyleSheet, StatusBar } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+    Dimensions, Image, StyleSheet,
+    StatusBar
+} from "react-native";
 
-
-import theme from "./Theme";
+import theme, { Box } from "./Theme";
 
 const { width } = Dimensions.get("window");
 export const assets = [require("./assets/patterns/1.png")];
@@ -26,46 +27,35 @@ const styles = StyleSheet.create({
 });
 
 interface ContainerProps {
-    childeren: ReactNode;
+    children: ReactNode;
     footer: ReactNode;
 }
 
-const Container = ({ childeren, footer }: ContainerProps) => {
-    const insets = useSafeAreaInsets();
+const Container = ({ children, footer }: ContainerProps) => {
 
     return (
-        <View style={{ flex: 1, backgroundColor: theme.colors.title }}>
+
+        <Box flex={1} backgroundColor="title">
             <StatusBar barStyle="light-content" />
-            <View style={{ backgroundColor: "white" }}>
-                <View style={styles.patterns}>
+            <Box backgroundColor="white">
+                <Box style={styles.patterns}>
                     <Image source={assets[0]} style={styles.img} />
-                </View>
-            </View>
-            <View
-                style={{
-                    flex: 1,
-                    overflow: "hidden",
-                }}
-            >
+                </Box>
+            </Box>
+            <Box flex={1} overflow="hidden">
                 <Image
                     source={assets[0]}
                     style={[styles.img, { ...StyleSheet.absoluteFillObject, top: -height * 0.61 }]}
                 />
-                <View
-                    style={{
-                        flex: 1,
-                        borderRadius: theme.borderRadii.xl,
-                        borderTopLeftRadius: 0,
-                        backgroundColor: "white",
-                    }}
-                >{childeren}
-                </View>
-            </View>
-            <View style={{ backgroundColor: theme.colors.title, paddingTop: theme.spacing.m }}>
+                <Box flex={1} borderRadius="xl" borderTopLeftRadius={0} backgroundColor="white">
+                    {children}
+                </Box>
+            </Box>
+            <Box backgroundColor="title" paddingTop="m">
                 {footer}
-                <View style={{ height: insets.bottom }} />
-            </View>
-        </View>
+                <Box />
+            </Box>
+        </Box>
     );
 };
 

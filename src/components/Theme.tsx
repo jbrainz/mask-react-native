@@ -11,6 +11,8 @@ const theme = {
         grey: "rgba(12, 13,52, 0.05)",
         lightGray: "#f4f0ef",
         transparentButton: "#0c0d34",
+        darkgrey: "#8a8d90",
+        danger: "#ff0744"
     },
     spacing: {
         s: 8,
