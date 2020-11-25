@@ -1,61 +1,67 @@
 import React, { ReactNode } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 /* eslint-disable prettier/prettier */
 import {
     Dimensions, Image, StyleSheet,
-    StatusBar
+    Platform
 } from "react-native";
+import Constants from "expo-constants";
 
-import theme, { Box } from "./Theme";
+import { Box, useTheme } from "./Theme";
 
-const { width } = Dimensions.get("window");
-export const assets = [require("./assets/patterns/1.png")];
+
+
+const { width, height: wHeight } = Dimensions.get("window");
+export const assets = [
+    require("./assets/patterns/1.png"),
+    require("./assets/patterns/2.png"),
+    require("./assets/patterns/3.png")
+] as const;
+
 
 const aspectRatio = (2400 / 3200);
 const height = width * aspectRatio;
 
-const styles = StyleSheet.create({
-    patterns: {
-        borderBottomLeftRadius: theme.borderRadii.xl,
-        height: height * 0.61,
-        overflow: "hidden",
-    },
-    img: {
-        width,
-        height,
-        borderBottomLeftRadius: theme.borderRadii.xl,
-    },
-});
-
 interface ContainerProps {
     children: ReactNode;
     footer: ReactNode;
+    pattern: 0 | 1 | 2;
 }
 
-const Container = ({ children, footer }: ContainerProps) => {
-
+const Container = ({ children, footer, pattern }: ContainerProps) => {
+    const theme = useTheme();
+    const asset = assets[pattern];
     return (
-
-        <Box flex={1} backgroundColor="title">
-            <StatusBar barStyle="light-content" />
-            <Box backgroundColor="white">
-                <Box style={styles.patterns}>
-                    <Image source={assets[0]} style={styles.img} />
+        <KeyboardAwareScrollView scrollEnabled={false}>
+            <Box height={wHeight + (Platform.OS === "android" ? Constants.statusBarHeight : 0)} backgroundColor="title">
+                <Box backgroundColor="white">
+                    <Box borderBottomLeftRadius="xl" height={height * 0.61} overflow="hidden">
+                        <Image source={asset}
+                            style={{ width, height, borderBottomLeftRadius: theme.borderRadii.xl }} />
+                    </Box>
+                </Box>
+                <Box flex={1} overflow="hidden">
+                    <Image
+                        source={asset}
+                        style={{
+                            width, height,
+                            borderBottomLeftRadius: theme.borderRadii.xl,
+                            ...StyleSheet.absoluteFillObject, top: -height * 0.61,
+                        }}
+                    />
+                    <Box flex={1} borderRadius="xl" borderTopLeftRadius={0}
+                        justifyContent="center" padding="xl" backgroundColor="white">
+                        <KeyboardAwareScrollView style={{ flex: 1 }}>
+                            {children}
+                        </KeyboardAwareScrollView>
+                    </Box>
+                </Box>
+                <Box backgroundColor="title" paddingTop="s">
+                    {footer}
+                    <Box />
                 </Box>
             </Box>
-            <Box flex={1} overflow="hidden">
-                <Image
-                    source={assets[0]}
-                    style={[styles.img, { ...StyleSheet.absoluteFillObject, top: -height * 0.61 }]}
-                />
-                <Box flex={1} borderRadius="xl" borderTopLeftRadius={0} backgroundColor="white">
-                    {children}
-                </Box>
-            </Box>
-            <Box backgroundColor="title" paddingTop="m">
-                {footer}
-                <Box />
-            </Box>
-        </Box>
+        </KeyboardAwareScrollView>
     );
 };
 

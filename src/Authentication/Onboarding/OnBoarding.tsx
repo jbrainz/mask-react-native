@@ -4,19 +4,18 @@ import { View, StyleSheet, Dimensions, Image } from "react-native";
 import Animated, { divide, Extrapolate, interpolate, multiply } from "react-native-reanimated";
 import { interpolateColor, useScrollHandler } from "react-native-redash";
 
-import { theme } from "../../components";
-import { StackNavigationProps, Routes } from "../../components/Navigation";
+import { useTheme } from "../../components";
+import { AuthNavigationProps } from "../../components/Navigation";
+import { Theme, makeStyles } from "../../components/Theme";
 
 import Slide, { SLIDER_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
 import Dot from "./Dot";
 
-
-
 const { width } = Dimensions.get("window");
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -45,7 +44,8 @@ const styles = StyleSheet.create({
     , alignItems: "center",
     borderBottomRightRadius: theme.borderRadii.xl,
   },
-});
+}));
+
 const slides = [
   {
     title: "Relaxed",
@@ -100,17 +100,18 @@ const slides = [
 
 export const assets = slides.map(slide => slide.picture.src);
 
-const OnBoarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
+const OnBoarding = ({ navigation }: AuthNavigationProps<"Onboarding">) => {
+  const theme = useTheme();
+  const usestyles = useStyles();
   const scroll = useRef<Animated.ScrollView>(null);
-  //TODO: scrollHandler useScrollHandler?
   const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
     inputRange: slides.map((_, i) => i * width),
     outputRange: slides.map((slide) => slide.color),
   });
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.slider, { backgroundColor }]}>
+    <View style={usestyles.container}>
+      <Animated.View style={[usestyles.slider, { backgroundColor }]}>
         {slides.map(({ picture }, index) => {
           const opacity = interpolate(x, {
             inputRange: [(index - 0.5) * width, index * width, (index + 0.5) * width],
@@ -118,7 +119,7 @@ const OnBoarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) 
             extrapolate: Extrapolate.CLAMP,
           });
           return (
-            <Animated.View style={[styles.underlay, { opacity }]} key={index}>
+            <Animated.View style={[usestyles.underlay, { opacity }]} key={index}>
               <Image source={picture.src}
                 style={{
                   borderTopLeftRadius: theme.borderRadii.xl,
@@ -140,21 +141,17 @@ const OnBoarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) 
           bounces={false}
           {...scrollHandler}
         >
-          {/* <Slide title="Relaxed" />
-          <Slide title="Playful" right />
-          <Slide title="Excentric" />
-          <Slide title="Funky" right /> */}
           {slides.map(({ title, picture }, index) => (
             <Slide key={index} {...{ title, picture }} right={!!(index % 2)} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
-      <View style={styles.footer}>
+      <View style={usestyles.footer}>
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, backgroundColor }}
         />
-        <View style={styles.footerContent}>
-          <View style={styles.pagination}>
+        <View style={usestyles.footerContent}>
+          <View style={usestyles.pagination}>
             {slides.map((_, index) => (<Dot key={index} currentIndex={divide(x, width)}
               {...{ index }} />))}
           </View>
@@ -181,7 +178,7 @@ const OnBoarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) 
                     }
                   }}
                   {...{ subtitle, description, last }}
-                />)
+                />);
             })}
           </Animated.View>
         </View>

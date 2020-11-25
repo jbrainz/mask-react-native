@@ -1,19 +1,22 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 /* eslint-disable prettier/prettier */
 
-import { theme, Text, Button } from "../../components";
-import { StackNavigationProps, Routes } from "../../components/Navigation";
+import { useTheme, Text } from "../components/Theme";
+import { Button } from "../components";
+import { AuthNavigationProps } from "../components/Navigation";
 
 
 const { width } = Dimensions.get("window");
 const picture = {
-    src: require("../../../assets/img/5.jpg"),
+    src: require("../../assets/img/5.jpg"),
     width: 3383,
     height: 5074,
 };
 export const assets = [picture.src];
-const Welcome = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
+const Welcome = ({ navigation }: AuthNavigationProps<"Welcome">) => {
+    const theme = useTheme();
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={{
@@ -34,16 +37,17 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
             <View style={{
                 flex: 1,
                 borderTopRightRadius: theme.borderRadii.xl,
+                backgroundColor: "transparent",
             }} >
                 <View
                     style=
                     {{
-                        backgroundColor: "#4A454B",
+
                         position: "absolute",
                         top: 0,
                         left: 0,
                         right: 0,
-                        bottom: 0
+                        bottom: 0,
                     }}>
                     <View style={{
                         flex: 1,
@@ -62,15 +66,18 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
                             onPress={() => navigation.navigate("Login")}
                         />
                         <Button label="Join us It's free"
-                            variant="default" />
-                        <Button label="Forgot password"
-                            variant="transparent" />
+                            variant="default"
+                            onPress={() => navigation.navigate("SignUp")}
+                        />
+                        <BorderlessButton rippleColor="transparent"
+                            onPress={() => navigation.navigate("ForgotPassword")}>
+                            <Text variant="button" color="body">Forgot password?</Text>
+                        </BorderlessButton>
                     </View>
-
                 </View>
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default Welcome
+export default Welcome;
