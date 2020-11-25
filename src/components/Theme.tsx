@@ -15,6 +15,7 @@ export const theme = {
         transparentButton: "#0c0d34",
         darkgrey: "#8a8d90",
         danger: "#ff0744",
+        violet: "#7F00FF",
     },
     spacing: {
         s: 8,

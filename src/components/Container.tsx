@@ -11,7 +11,6 @@ import { Box, useTheme } from "./Theme";
 
 
 
-const { width, height: wHeight } = Dimensions.get("window");
 export const assets = [
     require("./assets/patterns/1.png"),
     require("./assets/patterns/2.png"),
@@ -19,6 +18,7 @@ export const assets = [
 ] as const;
 
 
+const { width, height: wHeight } = Dimensions.get("window");
 const aspectRatio = (2400 / 3200);
 const height = width * aspectRatio;
 

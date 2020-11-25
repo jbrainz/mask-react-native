@@ -2,6 +2,7 @@
 import * as React from "react";
 import { ThemeProvider } from "@shopify/restyle";
 import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import {
   assets as authenticationAssets,
@@ -27,10 +28,12 @@ export default function App() {
   return (
     <ThemeProvider {...{ theme }}>
       <LoadAssets {...{ fonts, assets }}>
-        <AppStack.Navigator headerMode="none">
-          <AppStack.Screen name="Authentication" component={AuthenticationNavigator} />
-          <AppStack.Screen name="Home" component={HomeNavigator} />
-        </AppStack.Navigator>
+        <SafeAreaProvider>
+          <AppStack.Navigator headerMode="none">
+            <AppStack.Screen name="Authentication" component={AuthenticationNavigator} />
+            <AppStack.Screen name="Home" component={HomeNavigator} />
+          </AppStack.Navigator>
+        </SafeAreaProvider>
       </LoadAssets>
     </ThemeProvider>
   );
