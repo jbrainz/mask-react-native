@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Routes } from "../components/Navigation";
+import { AuthRoutes } from "../components/Navigation";
 
 import OnBoarding, { assets as onBoardingAssets } from "./Onboarding";
 import Welcome, { assets as welcomeAssets } from "./Welcome";
@@ -12,7 +12,7 @@ import PasswordReset from "./PassordReset";
 
 export const assets = [...onBoardingAssets, ...welcomeAssets];
 
-export const AuthenticationStack = createStackNavigator<Routes>();
+export const AuthenticationStack = createStackNavigator<AuthRoutes>();
 
 export const AuthenticationNavigator = () => {
   return (

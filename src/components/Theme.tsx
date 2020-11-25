@@ -58,9 +58,15 @@ export const theme = {
             fontSize: 15,
             fontFamily: "SFProText-Regular",
             color: "body",
-        }
+        },
+        header: {
+            fontSize: 12,
+            fontFamily: "SFProText-Semibold",
+            lineHeight: 24,
+            color: "title",
+        },
     },
-    breakpoints: {}
+    breakpoints: {},
 };
 
 export type Theme = typeof theme;

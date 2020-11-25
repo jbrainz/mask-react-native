@@ -2,7 +2,7 @@
 import React from "react";
 import { Dimensions, Image, StyleSheet } from "react-native";
 
-import { Box, RoundedIconButton, Text } from "../../components";
+import { Box, Header, Text } from "../../components";
 import { theme } from "../../components/Theme";
 
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
@@ -11,6 +11,7 @@ const { width } = Dimensions.get("window");
 export const DRAWER_WIDTH = width * 0.8;
 const aspectRatio = (2400 / 3200);
 const height = DRAWER_WIDTH * aspectRatio;
+export const assets = [require("../../components/assets/patterns/3.png")];
 
 const items: DrawerItemProps[] = [
     {
@@ -64,41 +65,14 @@ const DrawerContent = () => {
                     right={0}
                     borderBottomRightRadius="xl"
                     backgroundColor="title"
-                    flexDirection="row"
-                    paddingTop="xl"
-                    justifyContent="space-between"
-                    paddingHorizontal="m"
                 >
-                    <RoundedIconButton
-                        size={24}
-                        name="x"
-                        color="white"
-                        backgroundColor="title"
-                        onPress={() => true}
-                    />
-                    <Text color="white">MY PROFILE</Text>
-                    <RoundedIconButton
-                        size={24}
-                        name="shopping-bag"
-                        color="white"
-                        backgroundColor="title"
-                        onPress={() => true}
-                    />
+                    <Header title="my profile" left={{ icon: "x", onPress: () => true }}
+                        right={{ icon: "shopping-bag", onPress: () => true }} />
                 </Box>
             </Box>
             <Box flex={0.8}>
                 <Box flex={1} backgroundColor="title" />
-                <Box flex={1} />
-                <Image
-                    source={require("../../components/assets/patterns/3.png")}
-                    style={{
-                        position: "absolute",
-                        left: 0,
-                        right: 0,
-                        bottom: -height * 0.61,
-                        width: DRAWER_WIDTH,
-                        height: height,
-                    }} />
+                <Box flex={1} backgroundColor="title" />
                 <Box
                     position="absolute"
                     top={0}
@@ -133,7 +107,7 @@ const DrawerContent = () => {
                 overflow="hidden"
             >
                 <Image
-                    source={require("../../components/assets/patterns/3.png")}
+                    source={assets[0]}
                     style={{
                         ...StyleSheet.absoluteFillObject,
                         position: "absolute",

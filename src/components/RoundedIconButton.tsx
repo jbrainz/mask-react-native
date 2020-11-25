@@ -21,4 +21,4 @@ RoundedIconButton.defaultProps = {
 };
 
 
-export default RoundedIconButton
+export default RoundedIconButton;
