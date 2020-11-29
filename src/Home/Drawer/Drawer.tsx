@@ -3,6 +3,7 @@ import React from "react";
 import { Dimensions, Image, StyleSheet } from "react-native";
 
 import { Box, Header, Text } from "../../components";
+import { HomeNavigationProps } from "../../components/Navigation";
 import { theme } from "../../components/Theme";
 
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
@@ -53,7 +54,7 @@ const items: DrawerItemProps[] = [
 
 ];
 
-const DrawerContent = () => {
+const DrawerContent = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
     return (
         <Box flex={1}>
             <Box flex={0.2} backgroundColor="white">
@@ -66,8 +67,11 @@ const DrawerContent = () => {
                     borderBottomRightRadius="xl"
                     backgroundColor="title"
                 >
-                    <Header title="my profile" left={{ icon: "x", onPress: () => true }}
-                        right={{ icon: "shopping-bag", onPress: () => true }} />
+                    <Header title="my profile" left={{
+                        icon: "x",
+                        onPress: () => navigation.closeDrawer(),
+                    }}
+                        right={{ icon: "shopping-bag", onPress: () => navigation.closeDrawer() }} dark={true} />
                 </Box>
             </Box>
             <Box flex={0.8}>

@@ -16,6 +16,8 @@ export const theme = {
         darkgrey: "#8a8d90",
         danger: "#ff0744",
         violet: "#7F00FF",
+        greyLight: "#fafafa",
+        ligthBlue: "#BFEAF5",
     },
     spacing: {
         s: 8,

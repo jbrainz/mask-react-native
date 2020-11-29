@@ -1,5 +1,5 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { CompositeNavigationProp } from "@react-navigation/native";
+import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export interface AuthNavigationProps<RouteName extends keyof AuthRoutes> {
@@ -7,6 +7,12 @@ export interface AuthNavigationProps<RouteName extends keyof AuthRoutes> {
     StackNavigationProp<AuthRoutes, RouteName>,
     DrawerNavigationProp<AppRoutes, "Home">
   >;
+  route: RouteProp<AuthRoutes, RouteName>;
+}
+
+export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
+  navigation: DrawerNavigationProp<HomeRoutes, RouteName>;
+  route: RouteProp<HomeRoutes, RouteName>;
 }
 
 export type AppRoutes = {
