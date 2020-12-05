@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Dimensions, Image, StyleSheet } from "react-native";
 
 import { Box, Header, Text } from "../../components";
-import { HomeNavigationProps } from "../../components/Navigation";
 import { theme } from "../../components/Theme";
 
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
@@ -54,7 +54,10 @@ const items: DrawerItemProps[] = [
 
 ];
 
-const DrawerContent = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
+//({ navigation }: HomeNavigationProps< "OutfitIdeas">)
+
+const DrawerContent = () => {
+    const navigation = useNavigation();
     return (
         <Box flex={1}>
             <Box flex={0.2} backgroundColor="white">
@@ -69,9 +72,9 @@ const DrawerContent = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
                 >
                     <Header title="my profile" left={{
                         icon: "x",
-                        onPress: () => navigation.closeDrawer(),
+                        onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
                     }}
-                        right={{ icon: "shopping-bag", onPress: () => navigation.closeDrawer() }} dark={true} />
+                        right={{ icon: "shopping-bag", onPress: () => true }} dark={true} />
                 </Box>
             </Box>
             <Box flex={0.8}>
@@ -102,7 +105,7 @@ const DrawerContent = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
                         <Text variant="title1" textAlign="center">Pius John</Text>
                         <Text variant="body" textAlign="center">piusunimke@gmail.com</Text>
                     </Box>
-                    {items.map((item) => (<DrawerItem key={item.screen} {...item} />))}
+                    {items.map((item) => (<DrawerItem key={item.icon} {...item} />))}
                 </Box>
             </Box>
             <Box backgroundColor="white"

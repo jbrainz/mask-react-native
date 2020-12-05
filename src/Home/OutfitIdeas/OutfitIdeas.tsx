@@ -33,11 +33,11 @@ const cards = [
 const step = 1 / (cards.length - 1);
 const OutfitIdeas = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const aIndex = useTransition(currentIndex)
+    const aIndex = useTransition(currentIndex);
     return (
         <Box flex={1} backgroundColor="white">
             <Header title="Outfit Ideas"
-                left={{ icon: "menu", onPress: navigation.openDrawer }}
+                left={{ icon: "menu", onPress: () => navigation.openDrawer() }}
                 right={{ icon: "shopping-bag", onPress: () => true }}
             />
             <Categories />

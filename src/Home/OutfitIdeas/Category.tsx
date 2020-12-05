@@ -39,7 +39,7 @@ const Category = ({ category: { color: backgroundColor, title } }: CategoryProps
                         width: INNER_RADIUS * 2,
                         height: INNER_RADIUS * 2,
                         borderRadius: INNER_RADIUS,
-                        backgroundColor
+                        backgroundColor,
                     }} />
                 </Box>
                 <Text textAlign="center" marginTop="s">{title}</Text>
