@@ -2,7 +2,7 @@
 import React from "react";
 import Animated, { add, Extrapolate, interpolate } from "react-native-reanimated";
 import { mix, mixColor, usePanGestureHandler } from "react-native-redash";
-import { StyleSheet, Dimensions, ImageRequireSource, Image } from "react-native";
+import { StyleSheet, Dimensions, ImageRequireSource } from "react-native";
 import { PanGestureHandler } from "react-native-gesture-handler";
 
 import { Box } from "../../components";

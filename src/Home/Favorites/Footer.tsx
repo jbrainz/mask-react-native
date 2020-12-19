@@ -17,7 +17,6 @@ const Footer = ({ label, onPress }: FooterProps) => {
                 <Button variant="primary" {...{ label, onPress }} />
             </Box>
         </Box>
-
     );
 };
 

@@ -4,27 +4,27 @@ import { BorderlessButton } from "react-native-gesture-handler";
 
 import { Box, RoundedIcon } from "../../components";
 
-
-
 interface OutfitProps {
     outfit: {
         color: string;
         aspectRatio: number;
         id: number;
+        selected: boolean
     }
     width: number;
 }
-const Outfit = ({ outfit: { color: backgroundColor, aspectRatio }, width }: OutfitProps) => {
+const Outfit = ({ outfit, width }: OutfitProps) => {
     const [selected, setSelected] = useState(false);
     return (
-        <BorderlessButton onPress={() => {setSelected((prev) => !prev); 
-            
+        <BorderlessButton onPress={() => {
+            setSelected((prev) => !prev);
+            outfit.selected = !outfit.selected;
         }}>
             <Box borderRadius="m"
                 marginBottom="m"
                 alignItems="flex-end"
                 padding="m"
-                style={{ backgroundColor, width, height: width * aspectRatio }}>
+                style={{ backgroundColor: outfit.color, width, height: width * outfit.aspectRatio }}>
                 {selected && (
                     <RoundedIcon name="check"
                         backgroundColor="primary"

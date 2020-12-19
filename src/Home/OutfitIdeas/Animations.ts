@@ -67,7 +67,6 @@ export const useSpring = ({
             set(config.restSpeedThreshold, 100),
             set(config.restDisplacementThreshold, 100),
         ]
-
         ),
     ]),
     cond(eq(gestureState, State.END), [
